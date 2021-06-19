@@ -34,19 +34,10 @@ object GeneralBindings {
     }
 
     @JvmStatic
-    @BindingAdapter("applyTintToImageView")
-    fun applyTintToImageView(view: ImageView, color: Int) {
-        view.setColorFilter(Color.parseColor("#cccccc"), android.graphics.PorterDuff.Mode.MULTIPLY)
-    }
-
-
-    @JvmStatic
     @BindingAdapter("applyDesigns")
     fun applyDesigns(view: ImageView, model: BicyclePartModel) {
         view.setImageResource(model.icon)
         view.setColorFilter(model.tint, android.graphics.PorterDuff.Mode.SRC_IN)
     }
-
-
 
 }

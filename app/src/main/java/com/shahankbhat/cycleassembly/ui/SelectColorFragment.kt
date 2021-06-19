@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shahankbhat.cycleassembly.BR
 import com.shahankbhat.cycleassembly.R
@@ -39,15 +40,9 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setToolBarTitle("Select colors")
-
         initRecyclerView()
 
-        viewModel.selectedList =
-            viewModel.cyclePartsList.filter2 { bicyclePartModel -> bicyclePartModel.count.get() > 0 }
-
-
         adapter.submitList(viewModel.selectedList)
-
         binding.model = viewModel.selectedList[currentSelectedIndex.get()]
 
         binding.btnSelectColor.setOnClickListener {
@@ -61,10 +56,13 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
             dialog.show(parentFragmentManager, dialog.tag)
         }
 
+        binding.btnContinue.setOnClickListener {
+            findNavController().navigate(R.id.nav_product_view_fragment)
+        }
+
     }
 
     private fun initRecyclerView() {
-
         val clickListener = ArrayList<CallBackModel<AdapterApplyColorBinding, BicyclePartModel>>()
         clickListener.add(CallBackModel(R.id.root) { model, position, card ->
             currentSelectedIndex.set(position)
@@ -89,14 +87,7 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
         this.forEach {
             if (function(it)) {
                 for(i in 0 until it.count.get()){
-                    val model = BicyclePartModel(
-                        it.partName,
-                        it.icon,
-                        currentSelectedIndex,
-                        it.size,
-                        it.tint,
-                        it.count
-                    )
+                    val model = it.cloneIt(currentSelectedIndex)
                     arrayList.add(model)
                 }
             }

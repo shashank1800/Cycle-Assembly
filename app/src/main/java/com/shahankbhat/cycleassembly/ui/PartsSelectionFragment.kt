@@ -36,7 +36,7 @@ class PartsSelectionFragment : BaseFragment(R.layout.fragment_parts_selection) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBarTitle("Select parts")
+        setToolBarTitle("Select Parts")
 
         initRecyclerView()
         adapter.submitList(viewModel.cyclePartsList)

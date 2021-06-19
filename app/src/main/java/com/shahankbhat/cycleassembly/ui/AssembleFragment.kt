@@ -43,6 +43,7 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolBarTitle("Assemble")
 
         initRecyclerView()
 
@@ -73,7 +74,6 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
             val size = binding.board.width * model.size
             val params = RelativeLayout.LayoutParams(size.toInt(), size.toInt())
 
-//            newImage.id = View.generateViewId()
             newImage.setImageResource(model.icon)
             newImage.x = card.getRoot().x
             newImage.y = card.getRoot().y
@@ -98,6 +98,9 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
 
                         newImage.x = newImage.x + distanceX
                         newImage.y = newImage.y + distanceY
+
+                        model.x = newImage.x + distanceX
+                        model.y = newImage.y + distanceY
 
                         xDown = movedX
                         yDown = movedY
@@ -125,14 +128,7 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
         this.forEach {
             if (function(it)) {
                 for(i in 0 until it.count.get()){
-                    val model = BicyclePartModel(
-                        it.partName,
-                        it.icon,
-                        currentSelectedIndex,
-                        it.size,
-                        it.tint,
-                        it.count
-                    )
+                    val model = it.cloneIt(currentSelectedIndex)
                     arrayList.add(model)
                 }
             }
