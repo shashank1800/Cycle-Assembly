@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Created by SHASHANK BHAT on 27-Feb-21.
+ * Created by SHASHANK BHAT on 19-Jun-21.
  *
  *
  */
@@ -36,24 +36,6 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
         notifyDataSetChanged()
     }
 
-    fun replaceList(subList: ArrayList<MODEL_TYPE>) {
-        list = subList
-        notifyDataSetChanged()
-    }
-
-    fun getItemList(): ArrayList<MODEL_TYPE> {
-        return list
-    }
-
-    fun getItem(position: Int): MODEL_TYPE {
-        return list[position]
-    }
-
-    fun clearList() {
-        list.clear()
-        notifyDataSetChanged()
-    }
-
     fun removeItemAt(position: Int) {
         list.removeAt(position)
         notifyDataSetChanged()
@@ -69,6 +51,7 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
         val item = list[position]
         holder.bindTo(item, variableId)
         holder.bindClickListener(item, callbacks)
+        holder.bindOnLongClickListener(item, callbacks)
     }
 
 }

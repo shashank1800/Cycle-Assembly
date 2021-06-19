@@ -1,6 +1,5 @@
 package com.shahankbhat.cycleassembly.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,13 +49,14 @@ class PartsSelectionFragment : BaseFragment(R.layout.fragment_parts_selection) {
     private fun initRecyclerView() {
 
         val clickListener = ArrayList<CallBackModel<AdapterSelectPartBinding, BicyclePartModel>>()
-        clickListener.add(CallBackModel(R.id.root) { model, position, binding ->
-            binding.cbSelect.isChecked = !model.isSelected.get()
-
-            if (model.isSelected.get())
-                binding.root.setCardBackgroundColor(Color.parseColor("#9BE4D2"))
-            else binding.root.setCardBackgroundColor(Color.parseColor("#E9EDEC"))
+        clickListener.add(CallBackModel(R.id.btn_remove) { model, position, binding ->
+            if (model.count.get() > 0)
+                model.count.set(model.count.get() - 1)
         })
+        clickListener.add(CallBackModel(R.id.btn_add) { model, position, binding ->
+            model.count.set(model.count.get() + 1)
+        })
+
         adapter = RecyclerGenericAdapter(
             R.layout.adapter_select_part,
             BR.model,

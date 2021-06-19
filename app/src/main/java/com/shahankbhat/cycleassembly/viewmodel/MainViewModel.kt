@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
                 "Frame",
                 R.drawable.part_body_frame,
                 currentIndex,
-                0.7f
+                0.6f
             )
         )
 
@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
                 "Handle",
                 R.drawable.part_handle,
                 currentIndex,
-                0.3f
+                0.2f
             )
         )
 
@@ -38,7 +38,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
                 "Inner tube",
                 R.drawable.part_inner_tube,
                 currentIndex,
-                0.3f
+                0.2f
             )
         )
 
@@ -47,7 +47,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
             BicyclePartModel(
                 "Tyre",
                 R.drawable.part_tyre,
-                currentIndex
+                currentIndex,
+                0.4f
             )
         )
 
@@ -55,7 +56,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
             BicyclePartModel(
                 "Seat",
                 R.drawable.part_seat,
-                currentIndex
+                currentIndex,
+                0.2f
             )
         )
     }

@@ -3,7 +3,7 @@ package com.shahankbhat.cycleassembly.generic_recycler_adapter
 import androidx.databinding.ViewDataBinding
 
 /**
- * Created by SHASHANK BHAT on 28-Feb-21.
+ * Created by SHASHANK BHAT on 19-Jun-21.
  *
  *
  */

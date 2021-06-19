@@ -29,7 +29,7 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
     private lateinit var binding: FragmentAssembleBinding
     private val viewModel: MainViewModel by activityViewModels()
 
-    private var currentSelectedIndex = ObservableInt(0)
+    private var currentSelectedIndex = ObservableInt(-1)
 
     private lateinit var adapter: RecyclerGenericAdapter<AdapterApplyColorBinding, BicyclePartModel>
 
@@ -47,7 +47,7 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
         initRecyclerView()
 
         val selectedList =
-            viewModel.cyclePartsList.filter2 { bicyclePartModel -> bicyclePartModel.isSelected.get() }
+            viewModel.cyclePartsList.filter2 { bicyclePartModel -> bicyclePartModel.count.get() > 0 }
 
         viewModel.selectedList = selectedList
         adapter.submitList(selectedList)
@@ -69,16 +69,14 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
             adapter.removeItemAt(position)
 
             val newImage = ImageView(requireContext())
-            val params = RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-//            params.leftMargin = 107
-            newImage.id = View.generateViewId()
+
+            val size = binding.board.width * model.size
+            val params = RelativeLayout.LayoutParams(size.toInt(), size.toInt())
+
+//            newImage.id = View.generateViewId()
             newImage.setImageResource(model.icon)
-            newImage.x = card.root.x
-            newImage.y = card.root.y
-
-
+            newImage.x = card.getRoot().x
+            newImage.y = card.getRoot().y
 
             binding.board.addView(newImage, params)
 
@@ -126,15 +124,17 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
 
         this.forEach {
             if (function(it)) {
-                val model = BicyclePartModel(
-                    it.partName,
-                    it.icon,
-                    currentSelectedIndex,
-                    it.size,
-                    it.tint,
-                    it.isSelected,
-                )
-                arrayList.add(model)
+                for(i in 0 until it.count.get()){
+                    val model = BicyclePartModel(
+                        it.partName,
+                        it.icon,
+                        currentSelectedIndex,
+                        it.size,
+                        it.tint,
+                        it.count
+                    )
+                    arrayList.add(model)
+                }
             }
         }
         return arrayList

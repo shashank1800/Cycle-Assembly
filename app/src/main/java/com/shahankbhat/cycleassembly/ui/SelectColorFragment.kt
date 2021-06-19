@@ -43,7 +43,7 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
         initRecyclerView()
 
         viewModel.selectedList =
-            viewModel.cyclePartsList.filter2 { bicyclePartModel -> bicyclePartModel.isSelected.get() }
+            viewModel.cyclePartsList.filter2 { bicyclePartModel -> bicyclePartModel.count.get() > 0 }
 
 
         adapter.submitList(viewModel.selectedList)
@@ -88,15 +88,17 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
 
         this.forEach {
             if (function(it)) {
-                val model = BicyclePartModel(
-                    it.partName,
-                    it.icon,
-                    currentSelectedIndex,
-                    it.size,
-                    it.tint,
-                    it.isSelected
-                )
-                arrayList.add(model)
+                for(i in 0 until it.count.get()){
+                    val model = BicyclePartModel(
+                        it.partName,
+                        it.icon,
+                        currentSelectedIndex,
+                        it.size,
+                        it.tint,
+                        it.count
+                    )
+                    arrayList.add(model)
+                }
             }
         }
         return arrayList

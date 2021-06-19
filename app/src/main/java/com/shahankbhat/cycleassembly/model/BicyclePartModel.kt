@@ -10,5 +10,5 @@ data class BicyclePartModel(
     var currentIndex : ObservableInt,
     var size : Float = 1f,
     var tint: Int = Color.parseColor("#000000"),
-    var isSelected : ObservableBoolean = ObservableBoolean(false),
+    var count : ObservableInt = ObservableInt(0)
 )

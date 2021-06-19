@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shahankbhat.cycleassembly.BR
 
 /**
- * Created by SHASHANK BHAT on 27-Feb-21.
+ * Created by SHASHANK BHAT on 19-Jun-21.
  *
  *
  */
@@ -23,6 +23,17 @@ class RecyclerViewHolder<BIND_TYPE : ViewDataBinding>(var binding: BIND_TYPE) :
         callbacks?.forEach { callback ->
             binding.root.findViewById<View>(callback.id).setOnClickListener {
                 callback.block(model, adapterPosition, binding)
+            }
+        }
+
+    }
+
+    fun <MODEL_TYPE> bindOnLongClickListener(model: MODEL_TYPE, callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>?){
+
+        callbacks?.forEach { callback ->
+            binding.root.findViewById<View>(callback.id).setOnLongClickListener {
+                callback.block(model, adapterPosition, binding)
+                return@setOnLongClickListener true
             }
         }
 
