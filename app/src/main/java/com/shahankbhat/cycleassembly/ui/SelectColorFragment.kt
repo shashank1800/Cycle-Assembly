@@ -29,6 +29,12 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
 
     private lateinit var adapter: RecyclerGenericAdapter<AdapterApplyColorBinding, BicyclePartModel>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setToolBarTitle("Select colors")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,11 +45,12 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBarTitle("Select colors")
+
         initRecyclerView()
 
         adapter.submitList(viewModel.selectedList)
-        binding.model = viewModel.selectedList[currentSelectedIndex.get()]
+        if (currentSelectedIndex.get() < viewModel.selectedList.size)
+            binding.model = viewModel.selectedList[currentSelectedIndex.get()]
 
         binding.btnSelectColor.setOnClickListener {
             val dialog =
@@ -81,19 +88,6 @@ class SelectColorFragment : BaseFragment(R.layout.fragment_select_color) {
         binding.rvList.adapter = adapter
     }
 
-    private fun ArrayList<BicyclePartModel>.filter2(function: (BicyclePartModel) -> Boolean): ArrayList<BicyclePartModel> {
-        val arrayList = ArrayList<BicyclePartModel>()
-
-        this.forEach {
-            if (function(it)) {
-                for(i in 0 until it.count.get()){
-                    val model = it.cloneIt(currentSelectedIndex)
-                    arrayList.add(model)
-                }
-            }
-        }
-        return arrayList
-    }
 }
 
 

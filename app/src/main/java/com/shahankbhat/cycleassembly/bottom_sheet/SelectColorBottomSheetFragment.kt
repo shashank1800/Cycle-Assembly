@@ -26,11 +26,11 @@ class SelectColorBottomSheetFragment(val listener : Listener) : BaseBottomSheetF
     }
 
     init {
-        colorList.add(Color.parseColor("#5C95EA"))
-        colorList.add(Color.parseColor("#BD3D8A"))
-        colorList.add(Color.parseColor("#983D36"))
-        colorList.add(Color.parseColor("#C5B530"))
-        colorList.add(Color.parseColor("#46A14A"))
+        colorList.add(Color.parseColor("#000000"))
+        colorList.add(Color.parseColor("#B12525"))
+        colorList.add(Color.parseColor("#1B39CD"))
+        colorList.add(Color.parseColor("#F8C015"))
+        colorList.add(Color.parseColor("#FFFFFF"))
     }
 
     override fun onCreateView(

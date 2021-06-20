@@ -33,6 +33,13 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
 
     private lateinit var adapter: RecyclerGenericAdapter<AdapterApplyColorBinding, BicyclePartModel>
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setToolBarTitle("Assemble")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +50,6 @@ class AssembleFragment : BaseFragment(R.layout.fragment_assemble) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBarTitle("Assemble")
 
         initRecyclerView()
 

@@ -35,9 +35,14 @@ object GeneralBindings {
 
     @JvmStatic
     @BindingAdapter("applyDesigns")
-    fun applyDesigns(view: ImageView, model: BicyclePartModel) {
-        view.setImageResource(model.icon)
-        view.setColorFilter(model.tint, android.graphics.PorterDuff.Mode.SRC_IN)
+    fun applyDesigns(view: ImageView, model: BicyclePartModel?) {
+        model?.icon?.let {
+            view.setImageResource(it)
+        }
+        model?.tint?.let {
+            view.setColorFilter(it, android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+
     }
 
 }

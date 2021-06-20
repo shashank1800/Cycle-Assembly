@@ -26,6 +26,12 @@ class PartsSelectionFragment : BaseFragment(R.layout.fragment_parts_selection) {
 
     private lateinit var adapter: RecyclerGenericAdapter<AdapterSelectPartBinding, BicyclePartModel>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setToolBarTitle("Select Parts")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +42,6 @@ class PartsSelectionFragment : BaseFragment(R.layout.fragment_parts_selection) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBarTitle("Select Parts")
 
         initRecyclerView()
         adapter.submitList(viewModel.cyclePartsList)
