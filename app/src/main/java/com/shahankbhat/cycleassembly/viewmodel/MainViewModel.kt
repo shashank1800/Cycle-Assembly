@@ -26,6 +26,24 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
         cyclePartsList.add(
             BicyclePartModel(
+                "Tyre",
+                R.drawable.part_tyre,
+                currentIndex,
+                0.4f
+            )
+        )
+
+        cyclePartsList.add(
+            BicyclePartModel(
+                "Seat",
+                R.drawable.part_seat,
+                currentIndex,
+                0.2f
+            )
+        )
+
+        cyclePartsList.add(
+            BicyclePartModel(
                 "Handle",
                 R.drawable.part_handle,
                 currentIndex,
@@ -42,23 +60,5 @@ class MainViewModel @Inject constructor() : ViewModel() {
             )
         )
 
-
-        cyclePartsList.add(
-            BicyclePartModel(
-                "Tyre",
-                R.drawable.part_tyre,
-                currentIndex,
-                0.4f
-            )
-        )
-
-        cyclePartsList.add(
-            BicyclePartModel(
-                "Seat",
-                R.drawable.part_seat,
-                currentIndex,
-                0.2f
-            )
-        )
     }
 }
